@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import ch.qos.logback.core.net.server.Client;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,8 +29,10 @@ public class User implements Serializable{
 	private String phone;
 	private String password;
 	
+	@JsonIgnore //Para não dar loop por um pedido ter um cliente e um cliente ter varios pedidos
 	@OneToMany(mappedBy = "client")
 	private List<Order> orders=new ArrayList<>();
+	// Quando se tem uma associacao para muitos, acontece o lazyloading onde os muitos n sao carregados para nao explodir a memoria
 	
 	public User() {
 		
