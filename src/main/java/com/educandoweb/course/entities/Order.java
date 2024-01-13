@@ -72,6 +72,10 @@ public class Order implements Serializable {
 		Order other = (Order) obj;
 		return Objects.equals(id, other.id);
 	}
+	
+	public Double getTotal() {
+		return items.stream().map(x -> x.getSubTotal()).reduce(0.0, (x1, x2) -> x1+x2);
+	}
 
 	public Long getId() {
 		return id;
